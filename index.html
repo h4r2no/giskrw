@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(120deg, #3498db, #8e44ad);
+            overflow: hidden;
+        }
+        
+        .center {
+            position: relative;
+            width: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        
+        .center:hover {
+            transform: scale(1);
+        }
+        
+        .center h1 {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid silver;
+            color: #333;
+            background: linear-gradient(120deg, #3498db, #8e44ad);
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .center form {
+            padding: 0 40px;
+            box-sizing: border-box;
+        }
+        
+        form .txt_field {
+            position: relative;
+            border-bottom: 2px solid #adadad;
+            margin: 30px 0;
+        }
+        
+        .txt_field input {
+            width: 100%;
+            padding: 0 5px;
+            height: 40px;
+            font-size: 16px;
+            border: none;
+            background: none;
+            outline: none;
+        }
+        
+        .txt_field label {
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            color: #adadad;
+            transform: translateY(-50%);
+            font-size: 16px;
+            pointer-events: none;
+            transition: .5s;
+        }
+        
+        .txt_field span::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #3498db;
+            transition: .5s;
+        }
+        
+        .txt_field input:focus ~ label,
+        .txt_field input:valid ~ label {
+            top: -5px;
+            color: #3498db;
+        }
+        
+        .txt_field input:focus ~ span::before,
+        .txt_field input:valid ~ span::before {
+            width: 100%;
+        }
+        
+        .pass {
+            margin: -5px 0 20px 5px;
+            color: #a6a6a6;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .pass:hover {
+            color: #2691d9;
+            text-decoration: underline;
+        }
+        
+        input[type="submit"] {
+            width: 100%;
+            height: 50px;
+            border: 1px solid;
+            background: #2691d9;
+            border-radius: 25px;
+            font-size: 18px;
+            color: #e9f4fb;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+            transition: .5s;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        input[type="submit"]:hover {
+            background: #1c70af;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        input[type="submit"]:active {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .signup_link {
+            margin: 30px 0;
+            text-align: center;
+            font-size: 16px;
+            color: #666666;
+        }
+        
+        .signup_link a {
+            color: #2691d9;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .signup_link a:hover {
+            color: #1c70af;
+            text-decoration: underline;
+        }
+        
+        /* Animasi background */
+        .bg-bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .bg-bubbles li {
+            position: absolute;
+            list-style: none;
+            display: block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.15);
+            bottom: -160px;
+            animation: square 25s infinite;
+            transition-timing-function: linear;
+            border-radius: 50%;
+        }
+        
+        .bg-bubbles li:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .bg-bubbles li:nth-child(2) {
+            left: 20%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 2s;
+            animation-duration: 17s;
+        }
+        
+        .bg-bubbles li:nth-child(3) {
+            left: 25%;
+            animation-delay: 4s;
+        }
+        
+        .bg-bubbles li:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-duration: 22s;
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+        
+        .bg-bubbles li:nth-child(5) {
+            left: 70%;
+        }
+        
+        .bg-bubbles li:nth-child(6) {
+            left: 80%;
+            width: 120px;
+            height: 120px;
+            animation-delay: 3s;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .bg-bubbles li:nth-child(7) {
+            left: 32%;
+            width: 160px;
+            height: 160px;
+            animation-delay: 7s;
+        }
+        
+        .bg-bubbles li:nth-child(8) {
+            left: 55%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 15s;
+            animation-duration: 40s;
+        }
+        
+        .bg-bubbles li:nth-child(9) {
+            left: 25%;
+            width: 10px;
+            height: 10px;
+            animation-delay: 2s;
+            animation-duration: 40s;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .bg-bubbles li:nth-child(10) {
+            left: 90%;
+            width: 160px;
+            height: 160px;
+            animation-delay: 11s;
+        }
+        
+        @keyframes square {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-1000px) rotate(600deg);
+            }
+        }
+        
+        /* Alert styling */
+        .alert {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        /* Loading animation */
+        .loader {
+            display: none;
+            border: 5px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 5px solid #3498db;
+            width: 40px;
+            height: 40px;
+            margin: 10px auto;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Particle effect on success */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        .particle {
+            position: absolute;
+            background-color: #3498db;
+            border-radius: 50%;
+            animation: particle-animation 1s forwards;
+        }
+        
+        @keyframes particle-animation {
+            0% {
+                transform: translate(0, 0) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        /* Setup info */
+        .setup-info {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            padding: 0 20px;
+        }
+        
+        .setup-info a {
+            color: #ffeb3b;
+            text-decoration: none;
+        }
+        
+        .setup-info a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    
+    <div class="center">
+        <h1>Login</h1>
+        <div id="alertBox" class="alert"></div>
+        <div id="loader" class="loader"></div>
+        <form id="loginForm">
+            <div class="txt_field">
+                <input type="text" id="username" required>
+                <span></span>
+                <label>Username</label>
+            </div>
+            <div class="txt_field">
+                <input type="password" id="password" required>
+                <span></span>
+                <label>Password</label>
+            </div>
+            <div class="pass">Lupa Password?</div>
+            <input type="submit" value="Login">
+            <div class="signup_link">
+                Belum punya akun? <a href="#">Daftar</a>
+            </div>
+        </form>
+    </div>
+    
+    <div class="setup-info">
+        <p>Pastikan Anda telah menyiapkan Web App URL dari Google Apps Script untuk mengakses data dari Google Spreadsheet.</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const alertBox = document.getElementById('alertBox');
+            const loader = document.getElementById('loader');
+            
+            // URL Web App Google Apps Script yang menghasilkan CSV
+            // GANTI_DENGAN_WEB_APP_URL dengan URL Web App Anda
+            const webAppUrl = 'GANTI_DENGAN_WEB_APP_URL';
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                if (!username || !password) {
+                    showAlert('Username dan password harus diisi!', 'error');
+                    return;
+                }
+                
+                // Tampilkan loader
+                loader.style.display = 'block';
+                alertBox.style.display = 'none';
+                
+                // Panggil fungsi untuk memeriksa kredensial
+                checkCredentials(username, password);
+            });
+            
+            function checkCredentials(username, password) {
+                // Jika webAppUrl belum diganti, beri instruksi
+                if (webAppUrl === 'GANTI_DENGAN_WEB_APP_URL') {
+                    loader.style.display = 'none';
+                    showAlert('Silakan setup Web App URL terlebih dahulu. Lihat instruksi di bagian bawah halaman.', 'error');
+                    return;
+                }
+                
+                // Gunakan data dari Google Sheets melalui Web App URL
+                fetch(webAppUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.text();
+                    })
+                    .then(csvData => {
+                        // Sembunyikan loader
+                        loader.style.display = 'none';
+                        
+                        // Parse data CSV
+                        const users = parseCSV(csvData);
+                        
+                        if (users.length > 0) {
+                            // Cari pengguna dengan username dan password yang cocok
+                            const foundUser = users.find(user => 
+                                user.username && user.password &&
+                                user.username.trim() === username.trim() && 
+                                user.password.trim() === password.trim()
+                            );
+                            
+                            if (foundUser) {
+                                // Login berhasil
+                                showAlert('Login berhasil! Mengarahkan...', 'success');
+                                createParticles();
+                                
+                                // Simpan status login
+                                sessionStorage.setItem('isLoggedIn', 'true');
+                                sessionStorage.setItem('username', username);
+                                
+                                // Redirect ke halaman lain setelah 1,5 detik
+                                setTimeout(() => {
+                                    window.location.href = 'halaman-beranda.html';
+                                }, 1500);
+                            } else {
+                                // Login gagal
+                                showAlert('Username atau password salah!', 'error');
+                            }
+                        } else {
+                            showAlert('Tidak dapat mengakses data pengguna.', 'error');
+                        }
+                    })
+                    .catch(error => {
+                        // Sembunyikan loader
+                        loader.style.display = 'none';
+                        
+                        console.error('Error:', error);
+                        showAlert('Terjadi kesalahan saat menghubungi server. Pastikan Web App URL sudah benar.', 'error');
+                    });
+            }
+            
+            function parseCSV(csv) {
+                const lines = csv.split('\n');
+                const result = [];
+                
+                // Cari indeks kolom USERNAME dan PASSWORD
+                const headers = lines[0].split(',').map(header => header.trim().toLowerCase());
+                const usernameIndex = headers.indexOf('username');
+                const passwordIndex = headers.indexOf('password');
+                
+                // Jika kolom tidak ditemukan
+                if (usernameIndex === -1 || passwordIndex === -1) {
+                    showAlert('Format spreadsheet tidak valid. Pastikan ada kolom USERNAME dan PASSWORD.', 'error');
+                    return [];
+                }
+                
+                // Lewati baris header (asumsi baris pertama adalah header)
+                for (let i = 1; i < lines.length; i++) {
+                    const currentline = lines[i].split(',');
+                    if (currentline.length >= Math.max(usernameIndex, passwordIndex) + 1) {
+                        result.push({
+                            username: currentline[usernameIndex].trim(),
+                            password: currentline[passwordIndex].trim()
+                        });
+                    }
+                }
+                
+                return result;
+            }
+            
+            function showAlert(message, type) {
+                alertBox.textContent = message;
+                alertBox.className = `alert alert-${type}`;
+                alertBox.style.display = 'block';
+            }
+            
+            function createParticles() {
+                const particlesContainer = document.createElement('div');
+                particlesContainer.className = 'particles';
+                document.body.appendChild(particlesContainer);
+                
+                // Buat 50 partikel
+                for (let i = 0; i < 50; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    
+                    // Ukuran acak antara 5-10px
+                    const size = Math.random() * 5 + 5;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    // Warna acak
+                    const colors = ['#3498db', '#8e44ad', '#2ecc71', '#e74c3c', '#f1c40f'];
+                    particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    // Posisi awal di tengah layar
+                    const startX = window.innerWidth / 2;
+                    const startY = window.innerHeight / 2;
+                    particle.style.left = `${startX}px`;
+                    particle.style.top = `${startY}px`;
+                    
+                    // Pergerakan acak
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 300 + 200;
+                    const tx = Math.cos(angle) * speed;
+                    const ty = Math.sin(angle) * speed;
+                    
+                    particle.style.setProperty('--tx', `${tx}px`);
+                    particle.style.setProperty('--ty', `${ty}px`);
+                    
+                    particlesContainer.appendChild(particle);
+                    
+                    // Hapus partikel setelah animasi selesai
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 1000);
+                }
+                
+                // Hapus container setelah semua partikel hilang
+                setTimeout(() => {
+                    particlesContainer.remove();
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
